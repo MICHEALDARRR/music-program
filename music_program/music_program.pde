@@ -1,3 +1,4 @@
+//Libraries
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -5,12 +6,11 @@ import ddf.minim.signals.*;
 import ddf.minim.spi.*;
 import ddf.minim.ugens.*;
 
-//Libraries
-
-
 //Global Variables
 Minim minim; //creates object to access all functions
-AudioPlayer song1; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
+int numberOfSongs = 3;
+AudioPlayer[] song = new AudioPlayer[numberOfSongs]; //creates "Play List" variable holding extensions WAV, AIFF, AU, SND, and MP3
+int currentSong = numberOfSongs - numberOfSongs; //Current Song is 0
 
 void setup() {
   size(500, 600); //fullScreen(), displayWidth, displayHeight
@@ -18,12 +18,23 @@ void setup() {
   textSetup();
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
-  song1 = minim.loadFile(""); //able to pass absolute path, file name, and URL
+  song[currentSong] = minim.loadFile("Music/groove.mp3"); //able to pass absolute path, file name, and URL
+  song[currentSong+1] = minim.loadFile("Music/Beat_Your_Competition.mp3");
+  song[currentSong+2] = minim.loadFile("Music/The_Simplest.mp3");
   //song1.play(); //Parameter is milli-seconds from start of audio file to start playing
 }//End setup()
 
+void draw() {
+  powerButtonDraw();
+  //
+}//End draw()
+
 void keyPressed() {
-  //PlayPause
+  currentSong ++; // = currentSong + 1, += 1
+  if ( key == 'l' || key == 'L') song[currentSong].loop(0); //Parameter is Parameter is number of repeats
+}//End keyPressed()
+
+/*//PlayPause
   if (key == 'p') {
     if ( song1.isPlaying() ) {
       song1.pause();
@@ -55,8 +66,10 @@ void keyPressed() {
       song1.mute();
     }
   }
-}//End keyPressed()
-
+  //Loop Function
+  int loopIntNum = 2; //Loop Hardcode
+  if ( key == 'l' || key == 'L' ) song1.loop(loopIntNum); //Play Button
+  */
 void mousePressed() {
   powerButtonMousePressed();
 }//End mousepressed()

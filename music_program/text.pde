@@ -17,7 +17,7 @@ void textSetup() {
    String[] fontList = PFont.list(); //To list all fonts available on system
    printArray(fontList); //For listing all possible fonts to choose, then createFont
    */
-  font = createFont ("ComicSansMS", initialSize); //Verify font exists
+  font = createFont ("Harrington", initialSize); //Verify font exists
   //Tools / Create Font / Find Font / Do Not Press "OK", known bug
   //Layout with a rect(); Variables copied to text();
   //rect(quitButtonX, quitButtonY, quitButtonWidth, quitButtonHeight);
