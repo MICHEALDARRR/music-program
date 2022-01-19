@@ -18,16 +18,26 @@ void setup() {
   textSetup();
   //
   minim = new Minim(this); //load from data directory, loadFile should also load from project folder, like loadImage
-  song[currentSong] = minim.loadFile("music and sound/Lets Groove.mp3"); //able to pass absolute path, file name, and URL
-  song[currentSong+1] = minim.loadFile("music and sound/The Amazing Spider-Man 2 Ringtone.mp3");
-  song[currentSong+2] = minim.loadFile("music and sound/Portal Radio Tune.mp3");
+  song[currentSong] = minim.loadFile("music and sound/The Shining Theme.mp3"); //able to pass absolute path, file name, and URL
+  song[currentSong+1] = minim.loadFile("music and sound/Mountains Interstellar.mp3");
+  song[currentSong+2] = minim.loadFile("music and sound/Captain America 1966 Intro.mp3");
   //song1.play(); //Parameter is milli-seconds from start of audio file to start playing
 }//End setup()
 
 void draw() {
-  powerButtonDraw();
-  //
-}//End draw()
+  if ( song[currentSong].position() >= song[currentSong].length()-500 ) { //Errors for Grove and Simplist
+    song[currentSong].pause(); 
+    song[currentSong].rewind(); 
+    currentSong++;
+    if ( currentSong < numberOfSongs )song[currentSong].play();
+  }
+  if ( currentSong == numberOfSongs ) {
+    currentSong = numberOfSongs - numberOfSongs;
+    song[currentSong].play();
+  }
+  println (song[currentSong].position(), song[currentSong].length());
+}
+
 
 void keyPressed() {
   //currentSong ++; // = currentSong + 1, += 1
